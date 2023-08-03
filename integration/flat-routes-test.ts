@@ -3,8 +3,12 @@ import { test, expect } from "@playwright/test";
 
 import { PlaywrightFixture } from "./helpers/playwright-fixture";
 import type { Fixture, AppFixture } from "./helpers/create-fixture";
-import { createFixtureProject } from "./helpers/create-fixture";
-import { createAppFixture, createFixture, js } from "./helpers/create-fixture";
+import {
+  createAppFixture,
+  createFixture,
+  createFixtureProject,
+  js,
+} from "./helpers/create-fixture";
 
 let fixture: Fixture;
 let appFixture: AppFixture;
@@ -155,14 +159,14 @@ test.describe("flat routes", () => {
     });
   }
 
-  test("allows ignoredRouteFiles to be configured", async () => {
+  test("allows ignoredRouteFiles to be configured", () => {
     let routeIds = Object.keys(fixture.build.routes);
 
     expect(routeIds).not.toContain(IGNORED_ROUTE);
   });
 });
 
-test.describe("emits warnings for route conflicts", async () => {
+test.describe("emits warnings for route conflicts", () => {
   let buildStdio = new PassThrough();
   let buildOutput: string;
 
@@ -329,7 +333,7 @@ test.describe("pathless routes and route collisions", () => {
     appFixture = await createAppFixture(fixture);
   });
 
-  test.afterAll(async () => appFixture.close());
+  test.afterAll(() => appFixture.close());
 
   test.describe("with JavaScript", () => {
     runTests();

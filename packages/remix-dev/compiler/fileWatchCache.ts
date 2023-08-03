@@ -111,7 +111,8 @@ export function createFileWatchCache(): FileWatchCache {
   ): Promise<CacheValue<T>> {
     promiseForCacheKey.set(key, promise);
 
-    promise
+    // TODO: should errors be handled here?
+    void promise
       .catch(() => {
         // Swallow errors to prevent the build from crashing and remove the
         // rejected promise from the cache so consumers can retry

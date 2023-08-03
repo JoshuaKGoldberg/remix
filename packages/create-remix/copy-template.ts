@@ -166,6 +166,7 @@ async function extractLocalTarball(
       "There was a problem extracting the file from the provided template." +
         `  Template filepath: \`${tarballPath}\`` +
         `  Destination directory: \`${destPath}\`` +
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `  ${error}`
     );
   }

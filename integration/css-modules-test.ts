@@ -90,7 +90,7 @@ test.describe("CSS Modules", () => {
   test("basic styles", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/basic-styles-test");
-    let locator = await page.locator("[data-testid='basic-styles']");
+    let locator = page.locator("[data-testid='basic-styles']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -126,7 +126,7 @@ test.describe("CSS Modules", () => {
   test("global selectors", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/global-selector-test");
-    let locator = await page.locator("[data-testid='global-selector']");
+    let locator = page.locator("[data-testid='global-selector']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -162,7 +162,7 @@ test.describe("CSS Modules", () => {
   test("nested global selectors", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/nested-global-selector-test");
-    let locator = await page.locator("[data-testid='nested-global-selector']");
+    let locator = page.locator("[data-testid='nested-global-selector']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -199,7 +199,7 @@ test.describe("CSS Modules", () => {
   test("local class composition", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/local-class-composition-test");
-    let locator = await page.locator("[data-testid='local-class-composition']");
+    let locator = page.locator("[data-testid='local-class-composition']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -238,9 +238,7 @@ test.describe("CSS Modules", () => {
   test("imported class composition", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/imported-class-composition-test");
-    let locator = await page.locator(
-      "[data-testid='imported-class-composition']"
-    );
+    let locator = page.locator("[data-testid='imported-class-composition']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -279,7 +277,7 @@ test.describe("CSS Modules", () => {
   test("root relative imported class composition", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/root-relative-imported-class-composition-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='root-relative-imported-class-composition']"
     );
     let padding = await locator.evaluate(
@@ -318,9 +316,7 @@ test.describe("CSS Modules", () => {
   test("global class composition", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/global-class-composition-test");
-    let locator = await page.locator(
-      "[data-testid='global-class-composition']"
-    );
+    let locator = page.locator("[data-testid='global-class-composition']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -355,7 +351,7 @@ test.describe("CSS Modules", () => {
   test("local @value", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/local-value-test");
-    let locator = await page.locator("[data-testid='local-value']");
+    let locator = page.locator("[data-testid='local-value']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -393,7 +389,7 @@ test.describe("CSS Modules", () => {
   test("imported @value", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/imported-value-test");
-    let locator = await page.locator("[data-testid='imported-value']");
+    let locator = page.locator("[data-testid='imported-value']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -431,9 +427,7 @@ test.describe("CSS Modules", () => {
   test("root relative imported @value", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/root-relative-imported-value-test");
-    let locator = await page.locator(
-      "[data-testid='root-relative-imported-value']"
-    );
+    let locator = page.locator("[data-testid='root-relative-imported-value']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -477,7 +471,7 @@ test.describe("CSS Modules", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-test");
-    let locator = await page.locator("[data-testid='image-urls']");
+    let locator = page.locator("[data-testid='image-urls']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -522,9 +516,7 @@ test.describe("CSS Modules", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/root-relative-image-urls-test");
-    let locator = await page.locator(
-      "[data-testid='root-relative-image-urls']"
-    );
+    let locator = page.locator("[data-testid='root-relative-image-urls']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -569,7 +561,7 @@ test.describe("CSS Modules", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/absolute-image-urls-test");
-    let locator = await page.locator("[data-testid='absolute-image-urls']");
+    let locator = page.locator("[data-testid='absolute-image-urls']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -619,9 +611,7 @@ test.describe("CSS Modules", () => {
   test("client entry side effects", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/client-entry-side-effects-test");
-    let locator = await page.locator(
-      "[data-testid='client-entry-side-effects']"
-    );
+    let locator = page.locator("[data-testid='client-entry-side-effects']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -789,7 +779,7 @@ test.describe("CSS Modules", () => {
   test("tree shaking of unused component styles", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/tree-shaking-test");
-    let locator = await page.locator("[data-testid='tree-shaking']");
+    let locator = page.locator("[data-testid='tree-shaking']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );

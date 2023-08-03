@@ -19,12 +19,12 @@ const importPattern = (importSpecifier: string) =>
     String.raw`import\s*{.*}\s*from\s*"` + importSpecifier + String.raw`"`
   );
 
-const findCodeFiles = async (directory: string) =>
+const findCodeFiles = (directory: string) =>
   glob.sync("**/*.@(js|jsx|ts|tsx)", {
     cwd: directory,
     absolute: true,
   });
-const searchFiles = async (pattern: string | RegExp, files: string[]) => {
+const searchFiles = (pattern: string | RegExp, files: string[]) => {
   let result = shell.grep("-l", pattern, files);
   return result.stdout
     .trim()
@@ -154,17 +154,17 @@ test("compiler does not bundle url imports for server", async () => {
   );
 });
 
-test("compiler does not bundle url imports for browser", async () => {
+test("compiler does not bundle url imports for browser", () => {
   let browserBundle = findBrowserBundle(projectDir);
-  let browserCodeFiles = await findCodeFiles(browserBundle);
+  let browserCodeFiles = findCodeFiles(browserBundle);
 
-  let utilFiles = await searchFiles(
+  let utilFiles = searchFiles(
     importPattern("https://deno.land/x/util.ts"),
     browserCodeFiles
   );
   expect(utilFiles.length).toBeGreaterThanOrEqual(1);
 
-  let componentFiles = await searchFiles(
+  let componentFiles = searchFiles(
     importPattern("https://deno.land/x/component.ts"),
     browserCodeFiles
   );
@@ -174,7 +174,7 @@ test("compiler does not bundle url imports for browser", async () => {
   Url imports _could_ have side effects, but the vast majority do not.
   Currently Remix marks all URL imports as side-effect free.
   */
-  let serverOnlyUtilFiles = await searchFiles(
+  let serverOnlyUtilFiles = searchFiles(
     importPattern("https://deno.land/x/server-only.ts"),
     browserCodeFiles
   );
@@ -194,32 +194,29 @@ test("compiler bundles npm imports for server", async () => {
   expect(serverBundle).toContain("NPM_SERVER_ONLY");
 });
 
-test("compiler bundles npm imports for browser", async () => {
+test("compiler bundles npm imports for browser", () => {
   let browserBundle = findBrowserBundle(projectDir);
-  let browserCodeFiles = await findCodeFiles(browserBundle);
+  let browserCodeFiles = findCodeFiles(browserBundle);
 
-  let utilImports = await searchFiles(
-    importPattern("npm-util"),
-    browserCodeFiles
-  );
+  let utilImports = searchFiles(importPattern("npm-util"), browserCodeFiles);
   expect(utilImports.length).toBe(0);
-  let utilFiles = await searchFiles("NPM_UTIL", browserCodeFiles);
+  let utilFiles = searchFiles("NPM_UTIL", browserCodeFiles);
   expect(utilFiles.length).toBeGreaterThanOrEqual(1);
 
-  let componentImports = await searchFiles(
+  let componentImports = searchFiles(
     importPattern("npm-component"),
     browserCodeFiles
   );
   expect(componentImports.length).toBe(0);
-  let componentFiles = await searchFiles("NPM_COMPONENT", browserCodeFiles);
+  let componentFiles = searchFiles("NPM_COMPONENT", browserCodeFiles);
   expect(componentFiles.length).toBeGreaterThanOrEqual(1);
 
-  let serverOnlyImports = await searchFiles(
+  let serverOnlyImports = searchFiles(
     importPattern("npm-server-only"),
     browserCodeFiles
   );
   expect(serverOnlyImports.length).toBe(0);
-  let serverOnlyFiles = await searchFiles("NPM_SERVER_ONLY", browserCodeFiles);
+  let serverOnlyFiles = searchFiles("NPM_SERVER_ONLY", browserCodeFiles);
   expect(serverOnlyFiles.length).toBe(0);
 });
 

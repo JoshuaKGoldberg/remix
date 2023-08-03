@@ -77,7 +77,7 @@ test.describe("Vanilla Extract", () => {
   test("TypeScript", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/typescript-test");
-    let locator = await page.locator("[data-testid='typescript']");
+    let locator = page.locator("[data-testid='typescript']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -108,7 +108,7 @@ test.describe("Vanilla Extract", () => {
   test("JavaScript", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/javascript-test");
-    let locator = await page.locator("[data-testid='javascript']");
+    let locator = page.locator("[data-testid='javascript']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -147,7 +147,7 @@ test.describe("Vanilla Extract", () => {
   test("class composition", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/class-composition-test");
-    let locator = await page.locator("[data-testid='class-composition']");
+    let locator = page.locator("[data-testid='class-composition']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -186,7 +186,7 @@ test.describe("Vanilla Extract", () => {
   test("root-relative class composition", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/root-relative-class-composition-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='root-relative-class-composition']"
     );
     let padding = await locator.evaluate(
@@ -218,7 +218,7 @@ test.describe("Vanilla Extract", () => {
   test("side-effect imports", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/side-effect-imports-test");
-    let locator = await page.locator("[data-testid='side-effect-imports']");
+    let locator = page.locator("[data-testid='side-effect-imports']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -251,7 +251,7 @@ test.describe("Vanilla Extract", () => {
   test("side-effect imports within child compilation", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/side-effect-imports-within-child-compilation-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='side-effect-imports-within-child-compilation']"
     );
     let padding = await locator.evaluate(
@@ -303,7 +303,7 @@ test.describe("Vanilla Extract", () => {
     // asserting that it's the same class name.
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/stable-identifiers-test");
-    let locator = await page.locator("[data-testid='stable-identifiers']");
+    let locator = page.locator("[data-testid='stable-identifiers']");
     let { padding, classList } = await locator.evaluate((element) => ({
       padding: window.getComputedStyle(element).padding,
       classList: Array.from(element.classList),
@@ -346,7 +346,7 @@ test.describe("Vanilla Extract", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-via-css-url-test");
-    let locator = await page.locator("[data-testid='image-urls-via-css-url']");
+    let locator = page.locator("[data-testid='image-urls-via-css-url']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -388,7 +388,7 @@ test.describe("Vanilla Extract", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-via-root-relative-css-url-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='image-urls-via-root-relative-css-url']"
     );
     let backgroundImage = await locator.evaluate(
@@ -432,7 +432,7 @@ test.describe("Vanilla Extract", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-via-absolute-css-url-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='image-urls-via-absolute-css-url']"
     );
     let backgroundImage = await locator.evaluate(
@@ -477,9 +477,7 @@ test.describe("Vanilla Extract", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-via-js-import-test");
-    let locator = await page.locator(
-      "[data-testid='image-urls-via-js-import']"
-    );
+    let locator = page.locator("[data-testid='image-urls-via-js-import']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -522,7 +520,7 @@ test.describe("Vanilla Extract", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-via-root-relative-js-import-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='image-urls-via-root-relative-js-import']"
     );
     let backgroundImage = await locator.evaluate(
@@ -576,7 +574,7 @@ test.describe("Vanilla Extract", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-via-class-composition-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='image-urls-via-class-composition']"
     );
     let backgroundImage = await locator.evaluate(
@@ -631,7 +629,7 @@ test.describe("Vanilla Extract", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-via-js-import-class-composition-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='image-urls-via-js-import-class-composition']"
     );
     let backgroundImage = await locator.evaluate(

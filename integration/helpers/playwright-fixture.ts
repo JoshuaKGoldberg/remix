@@ -260,7 +260,7 @@ async function doAndWait(
     let evaluate = page.evaluate(() => {
       return new Promise((resolve) => setTimeout(resolve, 0));
     });
-    evaluate
+    void evaluate
       .catch(() => null)
       .then(() => {
         --requestCounter;

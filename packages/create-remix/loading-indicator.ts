@@ -147,10 +147,10 @@ async function gradient(
           ).padEnd(MAX_FRAMES - 1, " ")}  ${text}`
         );
         if (!done) await sleep(20);
-        loop();
+        void loop();
       }
 
-      loop();
+      void loop();
     },
     stop() {
       done = true;

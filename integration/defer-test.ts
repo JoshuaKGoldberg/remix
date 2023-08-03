@@ -32,7 +32,8 @@ declare global {
 test.beforeEach(async ({ context }) => {
   await context.route(/_data/, async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 50));
-    route.continue();
+    // TODO: Should this be awaited?
+    void route.continue();
   });
 });
 
@@ -789,7 +790,8 @@ test.describe("non-aborted", () => {
   }) => {
     let app = new PlaywrightFixture(appFixture, page);
     let assertConsole = monitorConsole(page);
-    app.goto("/deferred-manual-resolve");
+    // TODO: Should this be awaited?
+    void app.goto("/deferred-manual-resolve");
 
     await page.waitForSelector(`#${ROOT_ID}`);
     await page.waitForSelector(`#${DEFERRED_ID}`);
@@ -892,7 +894,8 @@ test.describe("non-aborted", () => {
     await ensureInteractivity(page, ROOT_ID);
     await ensureInteractivity(page, INDEX_ID);
 
-    app.clickLink("/deferred-script-rejected");
+    // TODO: Should this be awaited?
+    void app.clickLink("/deferred-script-rejected");
 
     await ensureInteractivity(page, DEFERRED_ID);
     await ensureInteractivity(page, ERROR_ID);

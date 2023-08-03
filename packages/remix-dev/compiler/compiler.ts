@@ -51,12 +51,12 @@ export let create = async (ctx: Context): Promise<Compiler> => {
   let compile = async (
     options: { onManifest?: (manifest: Manifest) => void } = {}
   ) => {
-    let error: unknown | undefined = undefined;
+    let error: unknown = undefined;
     let errCancel = (thrown: unknown) => {
       if (error === undefined) {
         error = thrown;
       }
-      cancel();
+      void cancel();
       return err(thrown);
     };
 

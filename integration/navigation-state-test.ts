@@ -25,7 +25,8 @@ test.describe("navigation states", () => {
   test.beforeEach(async ({ context }) => {
     await context.route(/_data/, async (route) => {
       await new Promise((resolve) => setTimeout(resolve, 50));
-      route.continue();
+      // TODO: Should this be awaited?
+      void route.continue();
     });
   });
 

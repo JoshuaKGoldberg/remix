@@ -78,7 +78,7 @@ test.describe("CSS side-effect imports", () => {
   test("basic side effect", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/basic-side-effect-test");
-    let locator = await page.locator("[data-testid='basic-side-effect']");
+    let locator = page.locator("[data-testid='basic-side-effect']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -107,7 +107,7 @@ test.describe("CSS side-effect imports", () => {
   test("root relative", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/root-relative-test");
-    let locator = await page.locator("[data-testid='root-relative']");
+    let locator = page.locator("[data-testid='root-relative']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -146,7 +146,7 @@ test.describe("CSS side-effect imports", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/image-urls-test");
-    let locator = await page.locator("[data-testid='image-urls']");
+    let locator = page.locator("[data-testid='image-urls']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -186,9 +186,7 @@ test.describe("CSS side-effect imports", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/root-relative-image-urls-test");
-    let locator = await page.locator(
-      "[data-testid='root-relative-image-urls']"
-    );
+    let locator = page.locator("[data-testid='root-relative-image-urls']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -228,7 +226,7 @@ test.describe("CSS side-effect imports", () => {
       if (res.url().endsWith(".svg")) imgStatus = res.status();
     });
     await app.goto("/absolute-image-urls-test");
-    let locator = await page.locator("[data-testid='absolute-image-urls']");
+    let locator = page.locator("[data-testid='absolute-image-urls']");
     let backgroundImage = await locator.evaluate(
       (element) => window.getComputedStyle(element).backgroundImage
     );
@@ -258,7 +256,7 @@ test.describe("CSS side-effect imports", () => {
   test("JSX in JS file", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/jsx-in-js-file-test");
-    let locator = await page.locator("[data-testid='jsx-in-js-file']");
+    let locator = page.locator("[data-testid='jsx-in-js-file']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -297,7 +295,7 @@ test.describe("CSS side-effect imports", () => {
   test("CommonJS package", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/commonjs-package-test");
-    let locator = await page.locator("[data-testid='commonjs-package']");
+    let locator = page.locator("[data-testid='commonjs-package']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );
@@ -339,7 +337,7 @@ test.describe("CSS side-effect imports", () => {
   test("ESM package", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/esm-package-test");
-    let locator = await page.locator("[data-testid='esm-package']");
+    let locator = page.locator("[data-testid='esm-package']");
     let padding = await locator.evaluate(
       (element) => window.getComputedStyle(element).padding
     );

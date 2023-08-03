@@ -68,13 +68,28 @@ const config = {
       ],
       parser: "@typescript-eslint/parser",
       parserOptions: {
+        project: true,
         sourceType: "module",
         ecmaVersion: 2019,
       },
       plugins: ["@typescript-eslint"],
-      rules: {
-        ...typescriptRules,
+      rules: typescriptRules,
+    },
+    {
+      excludedFiles: [
+        "**/*.md",
+        "**/*.mdx",
+        "**/*.md/*.ts",
+        "**/*.md/*.tsx",
+        "**/*.mdx/*.ts",
+        "**/*.mdx/*.tsx",
+      ],
+      extends: ["plugin:@typescript-eslint/recommended-type-checked"],
+      files: ["**/*.ts?(x)"],
+      parserOptions: {
+        project: true,
       },
+      rules: typescriptRules,
     },
     {
       files: [

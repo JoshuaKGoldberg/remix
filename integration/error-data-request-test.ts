@@ -92,7 +92,7 @@ test.describe("ErrorBoundary", () => {
     appFixture = await createAppFixture(fixture);
   });
 
-  test.beforeEach(async () => {
+  test.beforeEach(() => {
     errorLogs = [];
   });
 
@@ -128,7 +128,7 @@ test.describe("ErrorBoundary", () => {
   });
 
   test("returns a 405 x-remix-error on a data fetch with a bad method", async () => {
-    expect(() =>
+    await expect(() =>
       fixture.requestData("/loader-return-json", "routes/loader-return-json", {
         method: "TRACE",
       })

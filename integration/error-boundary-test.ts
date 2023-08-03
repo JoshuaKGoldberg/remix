@@ -993,12 +993,12 @@ test.describe("Default ErrorBoundary", () => {
     };
   }
 
-  test.beforeAll(async () => {
+  test.beforeAll(() => {
     _consoleError = console.error;
     console.error = () => {};
   });
 
-  test.afterAll(async () => {
+  test.afterAll(() => {
     console.error = _consoleError;
     appFixture.close();
   });

@@ -5,7 +5,7 @@ import { createAppFixture, createFixture, js } from "./helpers/create-fixture";
 import type { AppFixture, Fixture } from "./helpers/create-fixture";
 import { PlaywrightFixture } from "./helpers/playwright-fixture";
 
-test.describe("loader in an app", async () => {
+test.describe("loader in an app", () => {
   let appFixture: AppFixture;
   let fixture: Fixture;
   let _consoleError: typeof console.error;
@@ -226,7 +226,7 @@ test.describe("loader in an app", async () => {
   });
 });
 
-test.describe("Development server", async () => {
+test.describe("Development server", () => {
   let appFixture: AppFixture;
   let fixture: Fixture;
   let _consoleError: typeof console.error;

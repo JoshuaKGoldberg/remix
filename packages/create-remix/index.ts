@@ -40,7 +40,9 @@ async function createRemix(argv: string[]) {
     return;
   }
 
-  let steps = [
+  type Step = (context: Context) => void | Promise<void>;
+
+  let steps: Step[] = [
     introStep,
     projectNameStep,
     templateStep,
@@ -112,7 +114,7 @@ async function getContext(argv: string[]): Promise<Context> {
     "--version": versionRequested,
   } = flags;
 
-  let cwd = flags["_"][0] as string;
+  let cwd = flags["_"][0];
   let latestRemixVersion = await getLatestRemixVersion();
   let interactive = isInteractive();
   let projectName = cwd;
@@ -186,7 +188,7 @@ interface Context {
   versionRequested?: boolean;
 }
 
-async function introStep(ctx: Context) {
+function introStep(ctx: Context) {
   log(
     `\n${color.bgWhite(` ${color.whiteBright("remix")} `)}  ${color.green(
       color.bold(`v${ctx.remixVersion}`)
@@ -697,7 +699,7 @@ async function updatePackageJSON(ctx: Context) {
     packageJSON.name = ctx.projectName;
   }
 
-  fs.promises.writeFile(
+  await fs.promises.writeFile(
     packageJSONPath,
     JSON.stringify(sortPackageJSON(packageJSON), null, 2),
     "utf-8"

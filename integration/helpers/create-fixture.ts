@@ -48,7 +48,7 @@ export async function createFixture(init: FixtureInit, mode?: ServerMode) {
   let app: ServerBuild = await import(buildPath);
   let handler = createRequestHandler(app, mode || ServerMode.Production);
 
-  let requestDocument = async (href: string, init?: RequestInit) => {
+  let requestDocument = (href: string, init?: RequestInit) => {
     let url = new URL(href, "test://test");
     let request = new Request(url.toString(), {
       ...init,
@@ -57,11 +57,7 @@ export async function createFixture(init: FixtureInit, mode?: ServerMode) {
     return handler(request);
   };
 
-  let requestData = async (
-    href: string,
-    routeId: string,
-    init?: RequestInit
-  ) => {
+  let requestData = (href: string, routeId: string, init?: RequestInit) => {
     init = init || {};
     init.signal = init.signal || new AbortController().signal;
     let url = new URL(href, "test://test");
@@ -70,7 +66,7 @@ export async function createFixture(init: FixtureInit, mode?: ServerMode) {
     return handler(request);
   };
 
-  let postDocument = async (href: string, data: URLSearchParams | FormData) => {
+  let postDocument = (href: string, data: URLSearchParams | FormData) => {
     return requestDocument(href, {
       method: "POST",
       body: data,
@@ -105,6 +101,8 @@ export async function createAppFixture(fixture: Fixture, mode?: ServerMode) {
     port: number;
     stop: VoidFunction;
   }> => {
+    // https://github.com/typescript-eslint/typescript-eslint/issues/7405
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     return new Promise(async (accept) => {
       let port = await getPort();
       let app = express();

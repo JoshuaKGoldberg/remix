@@ -9,8 +9,18 @@ module.exports = {
   "@typescript-eslint/no-namespace": "off",
   "@typescript-eslint/no-non-null-assertion": "off",
   "@typescript-eslint/no-var-requires": "off",
+  "@typescript-eslint/unbound-method": "off",
   "no-var": "off",
   "prefer-rest-params": "off",
+
+  // TODO: WAT
+
+  "@typescript-eslint/no-unsafe-argument": "off",
+  "@typescript-eslint/no-unsafe-assignment": "off",
+  "@typescript-eslint/no-unsafe-call": "off",
+  "@typescript-eslint/no-unsafe-enum-comparison": "off",
+  "@typescript-eslint/no-unsafe-member-access": "off",
+  "@typescript-eslint/no-unsafe-return": "off",
 
   // These rules are nice and we want to configure over the defaults
   "@typescript-eslint/no-use-before-define": [
@@ -46,8 +56,8 @@ module.exports = {
   "no-use-before-define": "off",
   "prefer-const": "off",
 
-  // These rules should eventually come from @typescript-eslint/stylistic
-  // in typescript-eslint@6
+  // These rules would come from @typescript-eslint/stylistic,
+  // but we don't want to overload users with stylistic demands
   "@typescript-eslint/consistent-type-assertions": "warn",
   "@typescript-eslint/consistent-type-imports": "warn",
 };

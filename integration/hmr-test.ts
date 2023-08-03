@@ -316,7 +316,7 @@ test("HMR", async ({ page, browserName }) => {
     // would be wiped out by a full page refresh
     // but should be persisted by hmr
     let input = page.getByLabel("Root Input");
-    expect(input).toBeVisible();
+    await expect(input).toBeVisible();
     await input.type("asdfasdf");
 
     let counter = await page.waitForSelector("#root-counter");
@@ -398,11 +398,11 @@ test("HMR", async ({ page, browserName }) => {
 
     let h1 = page.getByText("Changed");
     await h1.waitFor({ timeout: HMR_TIMEOUT_MS });
-    expect(h1).toHaveCSS("color", "rgb(255, 255, 255)");
-    expect(h1).toHaveCSS("background-color", "rgb(0, 0, 0)");
-    expect(h1).toHaveCSS("font-style", "italic");
-    expect(h1).toHaveCSS("font-weight", "800");
-    expect(h1).toHaveCSS("font-size", "32px");
+    await expect(h1).toHaveCSS("color", "rgb(255, 255, 255)");
+    await expect(h1).toHaveCSS("background-color", "rgb(0, 0, 0)");
+    await expect(h1).toHaveCSS("font-style", "italic");
+    await expect(h1).toHaveCSS("font-weight", "800");
+    await expect(h1).toHaveCSS("font-size", "32px");
 
     // verify that `<input />` value was persisted (i.e. hmr, not full page refresh)
     expect(await page.getByLabel("Root Input").inputValue()).toBe("asdfasdf");

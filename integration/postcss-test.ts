@@ -19,7 +19,7 @@ async function jsonFromBase64CssContent({
   page: Page;
   testId: string;
 }) {
-  let locator = await page.locator(`[data-testid=${testId}]`);
+  let locator = page.locator(`[data-testid=${testId}]`);
   let content = await locator.evaluate(
     (el) => getComputedStyle(el, ":after").content
   );
@@ -142,7 +142,7 @@ test.describe("PostCSS enabled", () => {
   test("regular style sheets", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/regular-style-sheets-test");
-    let locator = await page.locator("[data-testid='regular-style-sheets']");
+    let locator = page.locator("[data-testid='regular-style-sheets']");
     let padding = await locator.evaluate((el) => getComputedStyle(el).padding);
     expect(padding).toBe(TEST_PADDING_VALUE);
   });
@@ -189,7 +189,7 @@ test.describe("PostCSS enabled", () => {
   test("CSS Modules", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/css-modules-test");
-    let locator = await page.locator("[data-testid='css-modules']");
+    let locator = page.locator("[data-testid='css-modules']");
     let padding = await locator.evaluate((el) => getComputedStyle(el).padding);
     expect(padding).toBe(TEST_PADDING_VALUE);
   });
@@ -238,7 +238,7 @@ test.describe("PostCSS enabled", () => {
   test("Vanilla Extract", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/vanilla-extract-test");
-    let locator = await page.locator("[data-testid='vanilla-extract']");
+    let locator = page.locator("[data-testid='vanilla-extract']");
     let padding = await locator.evaluate((el) => getComputedStyle(el).padding);
     expect(padding).toBe(TEST_PADDING_VALUE);
   });
@@ -285,7 +285,7 @@ test.describe("PostCSS enabled", () => {
   test("CSS side-effect imports", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/css-side-effect-imports-test");
-    let locator = await page.locator("[data-testid='css-side-effect-imports']");
+    let locator = page.locator("[data-testid='css-side-effect-imports']");
     let padding = await locator.evaluate((el) => getComputedStyle(el).padding);
     expect(padding).toBe(TEST_PADDING_VALUE);
   });
@@ -335,7 +335,7 @@ test.describe("PostCSS enabled", () => {
   test("automatic Tailwind plugin insertion", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/automatic-tailwind-plugin-insertion-test");
-    let locator = await page.locator(
+    let locator = page.locator(
       "[data-testid='automatic-tailwind-plugin-insertion']"
     );
     let padding = await locator.evaluate((el) => getComputedStyle(el).padding);
@@ -421,7 +421,7 @@ test.describe("PostCSS disabled", () => {
   test("ignores PostCSS config", async ({ page }) => {
     let app = new PlaywrightFixture(appFixture, page);
     await app.goto("/postcss-disabled-test");
-    let locator = await page.locator("[data-testid='postcss-disabled']");
+    let locator = page.locator("[data-testid='postcss-disabled']");
     let padding = await locator.evaluate((el) => getComputedStyle(el).padding);
     expect(padding).not.toBe(TEST_PADDING_VALUE);
   });

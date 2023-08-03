@@ -6,7 +6,7 @@ import glob from "glob";
 
 import { createFixtureProject, js, json } from "./helpers/create-fixture";
 
-const searchFiles = async (pattern: string | RegExp, files: string[]) => {
+const searchFiles = (pattern: string | RegExp, files: string[]) => {
   let result = shell.grep("-l", pattern, files);
   return result.stdout
     .trim()
@@ -14,7 +14,7 @@ const searchFiles = async (pattern: string | RegExp, files: string[]) => {
     .filter((line) => line.length > 0);
 };
 
-const findCodeFiles = async (directory: string) =>
+const findCodeFiles = (directory: string) =>
   glob.sync("**/*.@(js|jsx|ts|tsx)", {
     cwd: directory,
     absolute: true,
@@ -174,11 +174,11 @@ test.describe("cloudflare compiler", () => {
     );
   });
 
-  test("node externals are not bundled in the browser bundle", async () => {
+  test("node externals are not bundled in the browser bundle", () => {
     let browserBundle = findBrowserBundle(projectDir);
-    let browserCodeFiles = await findCodeFiles(browserBundle);
+    let browserCodeFiles = findCodeFiles(browserBundle);
 
-    let asyncHooks = await searchFiles(
+    let asyncHooks = searchFiles(
       /async_hooks|AsyncLocalStorage/,
       browserCodeFiles
     );
