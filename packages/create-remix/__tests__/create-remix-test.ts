@@ -1037,7 +1037,7 @@ describe("create-remix CLI", () => {
       server.listen({ onUnhandledRequest: "error" });
     });
     it("uses the proxy from env var", async () => {
-      let projectDir = await getProjectDir("template");
+      let projectDir = getProjectDir("template");
 
       let { stderr } = await execCreateRemix({
         args: [

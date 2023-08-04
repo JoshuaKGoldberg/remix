@@ -77,6 +77,16 @@ const config = {
       },
     },
     {
+      excludedFiles: ["**/*.md?(x)/*.ts?(x)"],
+      files: ["**/*.ts?(x)"],
+      parserOptions: {
+        project: "./tsconfig.eslint.json",
+      },
+      rules: {
+        "@typescript-eslint/await-thenable": "error",
+      },
+    },
+    {
       files: [
         "**/routes/**/*.js?(x)",
         "**/routes/**/*.tsx",
